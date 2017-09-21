@@ -3,8 +3,8 @@
 % Department of Electrical and Computer Engineering, University of Florida
 % 09/07/2017
 clear;close all;clc
-load('PaviaU.mat')
-data = EF_reshape(paviaU);
+load('paviaU_subimg.mat')
+data = EF_reshape(paviaU_subimg);
 dim = size(data,1);
 M = 4; % number of endmembers
 [E] = VCA(data,'Endmembers',M);
@@ -27,5 +27,5 @@ toc
 
 for t = 1:4
 figure
-imagesc(reshape(P(t,:),610,340));axis image;colorbar
+imagesc(reshape(P(t,:),50,50));axis image;colorbar
 end
