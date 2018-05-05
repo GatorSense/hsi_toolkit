@@ -1,5 +1,5 @@
 # Gatorsense hsitoolkit anomaly detectors MATLAB version
-hsitoolkit##/anomaly_detectors
+hsitoolkit/anomaly_detectors
 
 Suite of anomaly detectors implemented so far: 
 - beta_anomaly: global anomaly detector, fits beta distribution to each band assuming entire image is background computes negative log likelihood of each pixel in the model
