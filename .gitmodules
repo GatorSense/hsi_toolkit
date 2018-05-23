@@ -4,3 +4,9 @@
 [submodule "unmixing/PCOMMEND"]
 	path = unmixing/PCOMMEND
 	url = https://github.com/GatorSense/PCOMMEND
+[submodule "target_characterization/MIACE"]
+	path = target_characterization/MIACE
+	url = https://github.com/GatorSense/MIACE
+[submodule "unmixing/EMD_HSI"]
+	path = unmixing/EMD_HSI
+	url = https://github.com/GatorSense/EMD_HSI
