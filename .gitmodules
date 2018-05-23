@@ -13,3 +13,6 @@
 [submodule "unmixing/BetaCompositionalModel"]
 	path = unmixing/BetaCompositionalModel
 	url = https://github.com/GatorSense/BetaCompositionalModel
+[submodule "target_characterization/FUMI"]
+	path = target_characterization/FUMI
+	url = https://github.com/GatorSense/FUMI
