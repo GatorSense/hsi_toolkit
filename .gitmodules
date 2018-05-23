@@ -1,0 +1,6 @@
+[submodule "unmixing/SPICE"]
+	path = unmixing/SPICE
+	url = https://github.com/GatorSense/SPICE
+[submodule "unmixing/PCOMMEND"]
+	path = unmixing/PCOMMEND
+	url = https://github.com/GatorSense/PCOMMEND
