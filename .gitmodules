@@ -10,3 +10,6 @@
 [submodule "unmixing/EMD_HSI"]
 	path = unmixing/EMD_HSI
 	url = https://github.com/GatorSense/EMD_HSI
+[submodule "unmixing/BetaCompositionalModel"]
+	path = unmixing/BetaCompositionalModel
+	url = https://github.com/GatorSense/BetaCompositionalModel
