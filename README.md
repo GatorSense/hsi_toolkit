@@ -4,7 +4,9 @@ hsi_toolkit
 ***
 NOTE: If this toolkit is used in any publication, presentation or elsewhere, the following reference must be cited:
 
-XXX
+A. Zare, P. Gader, T. Glenn, (2018, May) GatorSense/hsi_toolkit (Version v0.1),
+DOI forthcoming
+
 ****
 
 This repository contains submodules. 
