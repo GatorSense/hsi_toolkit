@@ -1,5 +1,5 @@
-# gatorsense hsitoolkit anomaly detectors matlab version
-##hsitoolkit/anomaly_detectors
+# Gatorsense hsitoolkit anomaly detectors MATLAB version
+hsitoolkit/anomaly_detectors
 
 Suite of anomaly detectors implemented so far: 
 - beta_anomaly: global anomaly detector, fits beta distribution to each band assuming entire image is background computes negative log likelihood of each pixel in the model
@@ -12,7 +12,7 @@ Suite of anomaly detectors implemented so far:
 - rx_anomaly: local anomaly detector, Widowed Reed-Xiaoli anomaly detector uses local mean and covariance to determine pixel to background distance
 - ssrx_anomaly: local anomaly detector, eliminate leading subspace as background, then use local mean and covariance to determine pixel to background distance
 
-Demo: 
+Demo instructions:
 (1) load an_hsi_image_sub_for_demo.mat
 (2) run anomaly_det_demo(hsi_img_sub, mask_sub, wavelengths)
 
