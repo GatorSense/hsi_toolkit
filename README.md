@@ -19,4 +19,4 @@ If you have any questions, please contact:
 Alina Zare  
 Electrical and Computer Engineering  
 University of Florida    
-azare@ufl.edu  
+azare [at] ufl.edu  
