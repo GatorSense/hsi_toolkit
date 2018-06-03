@@ -4,6 +4,7 @@ hsitoolkit/signature_detectors
 Demo instructions:
 
 (1) load an_hsi_img_for_tgt_det_demo.mat
+
 (2) run `det_out = signature_det_demo(hsi_sub, tgt_spectra, [], wavelengths, gtImg_sub)`
 
 Suite of signature detectors implemented so far:
@@ -37,6 +38,7 @@ Segmented mode is where a detector is applied to segments of the imagery separat
 See segmented examples in demo code. 
 
 Review and references for many of these signature detectors can be found in the literature review in Taylor Glenn's Ph.D. thesis: 
+
 Glenn, Taylor C. Context-dependent detection in hyperspectral imagery. Diss. University of Florida, 2013.
 
 Contact: Alina Zare, azare@ufl.edu
