@@ -14,11 +14,13 @@ function [osp_out] = osp_detector(hsi_img,tgt_sig,mask,n_dim_ss)
 % outputs:
 %  osp_out - detector image
 %
-% 8/8/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
+% 8/8/2012 - Taylor C. Glenn 
+% 6/2/2018 - Edited by Alina Zare
 %
 
 if ~exist('mask','var'); mask = []; end
 if ~exist('n_dim_ss','var'); n_dim_ss = 2; end
+addpath(fullfile('..','util'));
 
 osp_out = img_det(@osp_det,hsi_img,tgt_sig,mask,n_dim_ss);
 
@@ -33,7 +35,7 @@ mu = mean(hsi_data,2);
 x = hsi_data - repmat(mu,[1, n_pix]);
 
 % get pca rotation, no dim reduction
-[pca_data,~,vecs,vals] = pca(hsi_data,1);
+[~,~,vecs,~] = pca(hsi_data,1);
 
 s = (tgt_sig - mu);
 

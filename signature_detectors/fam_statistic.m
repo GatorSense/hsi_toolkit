@@ -1,28 +1,31 @@
-function [fam_out] = fam_statistic(hsi_img,tgt_sig)
+function [fam_out] = fam_statistic(hsi_img,tgt_sig, mu, siginv)
 %
-%function [fam_out] = fam_statistic(hsi_img,tgt_sig)
+%function [fam_out] = fam_statistic(hsi_img,tgt_sig, mu, siginv)
 %
 % False Alarm Mitigation Statistic from Subpixel Replacement Model
 %
 % inputs:
 %  hsi_image - n_row x n_col x n_band hyperspectral image
 %  tgt_sig - target signature (n_band x 1 - column vector)
+%  mu - background mean (n_band x 1 column vector) 
+%  siginv - background inverse covariance (n_band x n_band matrix) 
+
 %
 % outputs:
 %  fam_out - false alarm mitigation statistic
 %
-% 8/8/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
+% 8/8/2012 - Taylor C. Glenn
+% 6/2/2018 - Edited by Alina Zare
 %
 
 % assume target variance same as background variance
-
 [n_row,n_col,n_band] = size(hsi_img);
 n_pix = n_row*n_col;
 
 hsi_data = reshape(hsi_img,[n_pix,n_band])';
 
-mu = mean(hsi_data,2);
-siginv = pinv(cov(hsi_data'));
+if ~exist('mu','var'), mu = mean(hsi_data,2); end
+if ~exist('siginv','var'), siginv = pinv(cov(hsi_data')); end
 
 s = tgt_sig;
 sts = s'*s;

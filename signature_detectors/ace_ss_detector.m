@@ -13,12 +13,14 @@ function [ace_out] = ace_ss_detector(hsi_img,tgt_sigs,mask,mu,siginv)
 % outputs:
 %  ace_out - detector image
 %
-% 8/8/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
+% 8/8/2012 - Taylor C. Glenn 
+% 6/2/2018 - Edited by Alina Zare
 %
 
 if ~exist('mask','var'); mask = []; end
 if ~exist('mu','var'), mu = []; end
 if ~exist('siginv','var'), siginv = []; end
+addpath(fullfile('..','util'));
 
 ace_out = img_det(@ace_ss_det,hsi_img,tgt_sigs,mask,mu,siginv);
 
@@ -43,10 +45,6 @@ B = sum(z.*(siginv*z),1);
 
 ace_data = A./B;
 
-% ace_data = zeros(1,n_pix);
-% for i=1:n_pix
-%     ace_data(i) = (z(:,i)'*G*z(:,i)) / (z(:,i)'*siginv*z(:,i));
-% end
 
 end
 

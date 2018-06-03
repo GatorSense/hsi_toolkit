@@ -1,4 +1,4 @@
-function [hua_out] = hua_detector(hsi_img,tgt_sig,mask,ems,n_comp)
+function [hua_out] = hua_detector(hsi_img,tgt_sig,mask,ems,n_comp,siginv)
 %
 %function [hua_out] = hua_detector(hsi_img,tgt_sig,mask,ems,n_comp)
 %
@@ -16,32 +16,35 @@ function [hua_out] = hua_detector(hsi_img,tgt_sig,mask,ems,n_comp)
 %  mask - binary image limiting detector operation to pixels where mask is true
 %         if not present or empty, no mask restrictions are used
 %  ems - background endmembers
+%  siginv - background inverse covariance (n_band x n_band matrix) 
 %
 % outputs:
 %  hua_out - detector image
 %
-% 8/19/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
+% 8/19/2012 - Taylor C. Glenn 
+% 6/3/2018 - Edited by Alina Zare
 %
 
-hua_out = img_det(@hua_det,hsi_img,tgt_sig,mask,ems,n_comp);
+if ~exist('siginv','var'), siginv = []; end
+addpath(fullfile('..','util'));
+
+hua_out = img_det(@hua_det,hsi_img,tgt_sig,mask,ems,n_comp,siginv);
 
 end
 
-function hua_data = hua_det(hsi_data,tgt_sig,ems,n_comp)
+function hua_data = hua_det(hsi_data,tgt_sig,ems,n_comp,siginv)
 
-[n_band,n_pix] = size(hsi_data);
+[~,n_pix] = size(hsi_data);
 
-siginv = pinv(cov(hsi_data'));
-
-params = struct();
-params.sum_to_one = true;
+if isempty(siginv)
+    siginv = pinv(cov(hsi_data'));
+end
 
 % unmix data with target signature and background
-
-targ_P = unmix2(hsi_data,[tgt_sig ems],params); 
+targ_P = unmix(hsi_data,[tgt_sig ems]); 
 
 % model abundances with and without target
-P = unmix2(hsi_data,ems,params);
+P = unmix(hsi_data,ems);
 gmm_bg = gmdistribution.fit(P,n_comp,'Replicates',1,'Regularize',1e-6);
 
 % compute mixture likelihood ratio of each pixel

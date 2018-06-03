@@ -22,12 +22,14 @@ function [amsd_out] = amsd_detector(hsi_img,tgt_sigs,mask,n_dim_tgt,n_dim_bg)
 % outputs:
 %  amsd_out - detector image
 %
-% 8/22/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
+% 8/22/2012 - Taylor C. Glenn
+% 6/02/2018 - Edited by Alina Zare
 %
 
 if ~exist('mask','var'); mask = []; end
 if ~exist('n_dim_tgt','var'); n_dim_tgt = 1; end
 if ~exist('n_dim_bg','var'); n_dim_bg = 5; end
+addpath(fullfile('..','util'));
 
 amsd_out = img_det(@amsd_det,hsi_img,tgt_sigs,mask,n_dim_tgt,n_dim_bg);
 
@@ -46,7 +48,7 @@ for i=1:n_pix
 end
 corr_bg = corr_bg/n_pix;
 
-[Ubg,Sbg,Vbg] = svd(corr_bg,0);
+[Ubg,~,~] = svd(corr_bg,0);
 
 S_bg = Ubg(:,1:n_dim_bg);
 
@@ -58,8 +60,7 @@ if n_dim_tgt > 0
     end
     corr_tgt = corr_tgt/n_sigs;
     
-    
-    [Ut,St,Vt] = svd(corr_tgt,0);
+    [Ut,~,~] = svd(corr_tgt,0);
     S_t = Ut(:,1:n_dim_tgt);
 else
     S_t = tgt_sigs;

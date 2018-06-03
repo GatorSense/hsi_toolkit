@@ -12,7 +12,7 @@ function [qmf_out] = qmf_detector(hsi_img,tgt_sig,tgt_cov)
 % outputs:
 %  qmf_out - detector image
 %
-% 8/9/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
+% 8/9/2012 - Taylor C. Glenn
 %
 
 

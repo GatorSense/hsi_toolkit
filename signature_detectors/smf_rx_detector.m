@@ -15,17 +15,17 @@ function [out] = smf_rx_detector(hsi_img,tgt_sig,mask,guard_win,bg_win)
 % outputs:
 %  out - detector image
 %
-% 10/25/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
+% 10/25/2012 - Taylor C. Glenn
 %
 
 if ~exist('bg_win','var'), bg_win = 4; end
 if ~exist('guard_win','var'), guard_win = 2; end
+addpath(fullfile('..','util'));
 
 [n_row,n_col,n_band] = size(hsi_img);
 n_pix = n_row*n_col;
 
 if ~exist('mask','var') || isempty(mask), mask = true(n_row,n_col); end
-
 
 % create the mask
 mask_width = 1 + 2*guard_win + 2*bg_win;

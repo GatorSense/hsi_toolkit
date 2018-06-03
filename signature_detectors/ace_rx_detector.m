@@ -11,13 +11,15 @@ function [out,sig_ind] = ace_rx_detector(hsi_img,tgt_sig,mask,guard_win,bg_win,b
 %         if not present or empty, no mask restrictions are used
 %  guard_win - guard window radius (square,symmetric about pixel of interest) 
 %  bg_win - background window radius
+%  beta - scalar value used to diagonally covariance
 %
 % outputs:
 %  out - detector image
 %
-% 10/25/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
-%
+% 10/25/2012 - Taylor C. Glenn
+% 6/2/2018 - Edited by Alina Zare
 
+addpath(fullfile('..','util'));
 [n_row,n_col,n_band] = size(hsi_img);
 
 if ~exist('mask','var') || isempty(mask), mask = true(n_row,n_col); end
@@ -31,7 +33,7 @@ reg = beta*eye(n_band);
 
 end
 
-function [r,sig_ind] = ace_rx_pt(x,ind,bg,b_mask,args,reg)
+function [r,sig_ind] = ace_rx_pt(x,~,bg,~,args,reg)
 
 if ~isempty(bg)
     siginv = pinv(cov(bg') + reg);

@@ -1,4 +1,4 @@
-function [spsmf_out] = spsmf_detector(hsi_img,tgt_sig,mask)
+function [spsmf_out] = spsmf_detector(hsi_img,tgt_sig,mask,mu,siginv)
 %
 %function [spsmf_out] = spsmf_detector(hsi_img,tgt_sig,mask)
 %
@@ -6,33 +6,41 @@ function [spsmf_out] = spsmf_detector(hsi_img,tgt_sig,mask)
 %  matched filter derived from a subpixel mixing model
 %  H0: x = b
 %  H1: x = alpha*s + beta*b 
+%  Ref: formulation from Eismann's book, pp 664
 %
 % inputs:
 %  hsi_image - n_row x n_col x n_band hyperspectral image
 %  tgt_sig - target signature (n_band x 1 - column vector)
 %  mask - binary image limiting detector operation to pixels where mask is true
 %         if not present or empty, no mask restrictions are used
+%  mu - background mean (n_band x 1 column vector) 
+%  siginv - background inverse covariance (n_band x n_band matrix) 
 %
 % outputs:
 %  spsmf_out - detector image
 %
-% 8/8/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
-%
+% 8/8/2012 - Taylor C. Glenn 
+% 6/2/2018 - Edited by Alina Zare
 
 if ~exist('mask','var'); mask = []; end
+if ~exist('mu','var'), mu = []; end
+if ~exist('siginv','var'), siginv = []; end
+addpath(fullfile('..','util'));
 
-spsmf_out = img_det(@spsmf_det,hsi_img,tgt_sig,mask);
+spsmf_out = img_det(@spsmf_det,hsi_img,tgt_sig,mask,mu,siginv);
 
 end
 
-function spsmf_data = spsmf_det(hsi_data,tgt_sig)
-
-% formulation from Eismann's book, pp 664
+function spsmf_data = spsmf_det(hsi_data,tgt_sig,mu,siginv)
 
 [n_band,n_pix] = size(hsi_data);
 
-mu = mean(hsi_data,2);
-siginv = pinv(cov(hsi_data'));
+if isempty(mu)
+    mu = mean(hsi_data,2);
+end
+if isempty(siginv)
+    siginv = pinv(cov(hsi_data'));
+end
 
 s = tgt_sig;
 st_siginv = s'*siginv;

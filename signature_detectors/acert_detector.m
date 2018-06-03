@@ -9,18 +9,22 @@ function [acert_out,mu,siginv] = acert_detector(hsi_img,tgt_sig,mask,mu,siginv)
 %  tgt_sig - target signature (n_band x 1 - column vector)
 %  mask - binary image limiting detector operation to pixels where mask is true
 %         if not present or empty, no mask restrictions are used
+%  mu - background mean (n_band x 1 column vector) 
+%  siginv - background inverse covariance (n_band x n_band matrix) 
 %
 % outputs:
 %  ace_out - detector image
-%  mu - mean of input data
-%  siginv - inverse covariance of input data
+%  mu - mean of background
+%  siginv - inverse covariance of background
 %
-% 8/8/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
+% 8/8/2012 - Taylor C. Glenn
+% 6/2/2018 - Edited by Alina Zare
 %
 
 if ~exist('mask','var'), mask = []; end
 if ~exist('mu','var'), mu = []; end
 if ~exist('siginv','var'), siginv = []; end
+addpath(fullfile('..','util'));
 
 [acert_out,mu,siginv] = img_det(@acert_det,hsi_img,tgt_sig,mask,mu,siginv);
 
@@ -47,11 +51,6 @@ B = sqrt(st_siginv_s);
 C = sqrt(sum(z.*(siginv*z),1));
 
 acert_data = A./(B.*C);
-
-% ace_data = zeros(1,n_pix);
-% for i=1:n_pix
-%     ace_data(i) = (st_siginv*z(:,i))^2 / (st_siginv_s * z(:,i)'*siginv*z(:,i));
-% end
 
 end
 

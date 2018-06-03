@@ -14,11 +14,12 @@ function [palm_out] = palm_detector(hsi_img,tgt_sig,mask,n_comp)
 % outputs:
 %  palm_out - detector image
 %
-% 8/8/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
-%
+% 8/8/2012 - Taylor C. Glenn
+% 6/2/2018 - Edited by Alina Zare
 
 if ~exist('mask','var'); mask = []; end
 if ~exist('n_comp','var'); n_comp = 5; end
+addpath(fullfile('..','util'));
 
 palm_out = img_det(@palm_det,hsi_img,tgt_sig,mask,n_comp);
 
@@ -26,7 +27,7 @@ end
 
 function palm_data = palm_det(hsi_data,tgt_sig,n_comp)
 
-[n_band,n_pix] = size(hsi_data);
+[~,n_pix] = size(hsi_data);
 
 % fit the model
 gmm = gmdistribution.fit(hsi_data',n_comp,'Replicates',1,'Regularize',1e-6);
@@ -50,7 +51,6 @@ end
 palm_data = zeros(1,n_pix);
 
 for i=1:n_pix
-    
     dists = zeros(1,n_comp);
     for j=1:n_comp
         dists(j) = (filt{j}*(hsi_data(:,i) - mu{j}))^2;

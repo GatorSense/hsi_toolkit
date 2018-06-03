@@ -13,10 +13,12 @@ function [sam_out] = sam_detector(hsi_img,tgt_sig,mask)
 % outputs:
 %  sam_out - detector image
 %
-% 8/8/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
+% 8/8/2012 - Taylor C. Glenn
+% 6/2/2018 - Edited by Alina Zare
 %
 
 if ~exist('mask','var'); mask = []; end
+addpath(fullfile('..','util'));
 
 sam_out = img_det(@sam_det,hsi_img,tgt_sig,mask);
 
@@ -28,7 +30,6 @@ prod = tgt_sig'*hsi_data;
 
 mag = sqrt((tgt_sig'*tgt_sig) * sum(hsi_data.^2,1));
 
-%sam_data = -acos( prod./mag ); % can return complex values
 sam_data = prod./mag;
 
 end

@@ -1,10 +1,8 @@
-function [hsd_out,tgt_p] = hsd_detector(hsi_img,tgt_sig,mask,ems)
+function [hsd_out,tgt_p] = hsd_detector(hsi_img,tgt_sig,mask,ems, siginv)
 %
 %function [hsd_out,tgt_p] = hsd_detector(hsi_img,tgt_sig,mask,ems)
 %
-% Hybrid Structured Detector Detector
-%  (from the department of redundancy department,
-%   please enter your PIN number at the ATM machine)
+% Hybrid Structured Detector 
 %
 %  ref:
 %  Hybrid Detectors for Subpixel Targets
@@ -18,21 +16,26 @@ function [hsd_out,tgt_p] = hsd_detector(hsi_img,tgt_sig,mask,ems)
 %  mask - binary image limiting detector operation to pixels where mask is true
 %         if not present or empty, no mask restrictions are used
 %  ems - background endmembers
+%  siginv - background inverse covariance (n_band x n_band matrix) 
 %
 % outputs:
 %  hsd_out - detector image
 %  tgt_p - target proportion in unmixing
 %
-% 8/19/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
+% 8/19/2012 - Taylor C. Glenn
+% 6/2/2018 - Edited by Alina Zare
 %
 
-[hsd_out,tgt_p] = img_det(@hsd_det,hsi_img,tgt_sig,mask,ems);
+if ~exist('siginv','var'), siginv = []; end
+addpath(fullfile('..','util'));
+
+[hsd_out,tgt_p] = img_det(@hsd_det,hsi_img,tgt_sig,mask,ems,siginv);
 
 end
 
-function [hsd_data,tgt_p] = hsd_det(hsi_data,tgt_sig,ems)
+function [hsd_data,tgt_p] = hsd_det(hsi_data,tgt_sig,ems,siginv)
 
-[n_band,n_pix] = size(hsi_data);
+[~,n_pix] = size(hsi_data);
 
 % unmix data with only background endmembers
 P = unmix(hsi_data,ems); 
@@ -40,8 +43,9 @@ P = unmix(hsi_data,ems);
 % unmix data with target signature as well
 targ_P = unmix(hsi_data,[tgt_sig ems]); 
 
-siginv = pinv(cov(hsi_data'));
-%siginv = eye(n_band);
+if isempty(siginv)
+    siginv = pinv(cov(hsi_data'));
+end
 
 hsd_data = zeros(1,n_pix);
 
@@ -55,38 +59,3 @@ tgt_p = targ_P(:,1:size(tgt_sig,2))';
 
 end
 
-function [P] = unmix(data, endmembers)
-
-%endmembers should be column vectors
-X = data;
-
-%number of endmembers
-M = size(endmembers, 2);
-%number of pixels
-N = size(X, 2);
-
-%set up constraint matrices
-L = [];
-k = [];
-    
-A = ones([1, M]);  % sum to one;
-b = 1;
-
-l = zeros(M,1);
-u = ones(M,1);
-
-P = zeros(N,M);
-
-E = endmembers';
-H = (2*E*E');
-
-for i = 1:N
-
-    Xi = X(:,i);
-
-    F = (-2*Xi'*E')';
-
-    P(i,:) = qpas(H, F, L, k, A, b, l, u); % from fast_spice/qpc directory
-end
-
-end

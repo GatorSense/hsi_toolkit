@@ -13,7 +13,7 @@ function [smf_out] = smf_max_detector(hsi_img,tgt_sigs,mask,mu,siginv)
 % outputs:
 %  smf_out - detector image
 %
-% 8/8/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
+% 8/8/2012 - Taylor C. Glenn
 %
 
 if ~exist('mask','var'); mask = []; end

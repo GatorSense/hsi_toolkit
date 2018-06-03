@@ -12,7 +12,7 @@ function [ftmf_out] = ftmf_detector(hsi_img,tgt_sig,gamma)
 % outputs:
 %  ftmf_out - detector image
 %
-% 8/12/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
+% 8/12/2012 - Taylor C. Glenn
 %
 
 % makes the simplifying assumption that target variance

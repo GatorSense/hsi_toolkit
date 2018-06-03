@@ -15,7 +15,8 @@ function [out] = hsd_rx_detector(hsi_img,tgt_sig,mask,guard_win,bg_win,ems,beta)
 % outputs:
 %  out - detector image
 %
-% 1/25/2013 - Taylor C. Glenn - tcg@cise.ufl.edu
+% 1/25/2013 - Taylor C. Glenn 
+% 6/3/2018 - Edited by Alina Zare
 %
 
 [n_row,n_col,n_band] = size(hsi_img);
@@ -28,20 +29,18 @@ if ~exist('beta','var'), beta = 0; end
 hsi_data = reshape(hsi_img,n_row*n_col,n_band)';
 
 reg = beta*eye(n_band);
-params = struct();
-params.sum_to_one = true;
 
 % unmix data with only background endmembers
-P = unmix2(hsi_data,ems,params); %unmix2 from FUMI directory currently
+P = unmix(hsi_data,ems);
 
 % unmix data with target signature as well
-targ_P = unmix2(hsi_data,[tgt_sig ems],params); 
+targ_P = unmix(hsi_data,[tgt_sig ems]); 
 
 [out] = rx_det(@hsd_rx_pt,hsi_img,tgt_sig,mask,guard_win,bg_win,reg,ems,P,targ_P);
 
 end
 
-function [r] = hsd_rx_pt(x,ind,bg,b_mask,args,reg,ems,P,targ_P)
+function [r] = hsd_rx_pt(x,ind,bg,~,args,reg,ems,P,targ_P)
 
 if ~isempty(bg)
     sigma = cov(bg');

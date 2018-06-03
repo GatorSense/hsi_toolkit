@@ -16,12 +16,14 @@ function [ccmf_out,gmm] = ccmf_detector(hsi_img,tgt_sig,mask,n_comp,gmm)
 %  ccmf_out - detector image
 %  gmm - mixture model learned from input image
 %
-% 8/8/2012 - Taylor C. Glenn - tcg@cise.ufl.edu
+% 8/8/2012 - Taylor C. Glenn
+% 6/2/2018 - Edited by Alina Zare
 %
 
 if ~exist('mask','var'); mask = []; end
 if ~exist('n_comp','var'); n_comp = 5; end
 if ~exist('gmm','var'); gmm = []; end
+addpath(fullfile('..','util'));
 
 [ccmf_out,gmm] = img_det(@ccmf_det,hsi_img,tgt_sig,mask,n_comp,gmm);
 
@@ -29,7 +31,7 @@ end
 
 function [ccmf_data,gmm] = ccmf_det(hsi_data,tgt_sig,n_comp,gmm)
 
-[n_band,n_pix] = size(hsi_data);
+[~,n_pix] = size(hsi_data);
 
 if isempty(gmm)
     % fit the model
