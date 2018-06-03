@@ -176,7 +176,7 @@ figure;
 numR = 4;
 numC = ceil((i+1)/numR); 
 subplot(numR,numC,1); imagesc(get_RGB(img, wavelengths)); title('RGB image');
-subplot(numR,numC,1); imagesc(gtImage); title('Groundtruth image');
+subplot(numR,numC,2); imagesc(gtImage); title('Groundtruth image');
 for i = 1:length(det_out)
 	subplot(numR, numC, i+2); imagesc(det_out{i}.result); title(det_out{i}.method);
 end
