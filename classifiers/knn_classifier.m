@@ -21,7 +21,6 @@ end
 
 function knn_out = knn_cfr(hsi_data,train_data,K)
 
-
 % concatenate the training data
 train = [train_data.Spectra];
 n_train = size(train,2);
@@ -42,13 +41,7 @@ knn_out = zeros(n_pix,1);
 idx = knnsearch(train',hsi_data','K',K);
 
 for i=1:n_pix
-    
-%     dists = sum((repmat(hsi_data(:,i),[1,n_train])-train).^2,1);
-%         
-%     [sd,si] = sort(dists,'ascend');
-%     
-%     inds = si(1:K);
-
+   
     counts = zeros(n_class,1);
     for j=1:K
         counts(labels(idx(i,j))) = counts(labels(idx(i,j)))+1;

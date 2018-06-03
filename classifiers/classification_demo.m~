@@ -34,46 +34,25 @@ class_out{i}.params.k = 3;
 class_out{i}.result = knn_classifier(hsi_img,train_data,[],class_out{i}.params.k);
 class_out{i}.method = 'KNN';
 
-i = i+1;
-class_out{i}.params.k = 3;
-class_out{i}.params.m = 2.1;
-class_out{i}.result = fuzzy_knn_classifier(hsi_img,train_data,class_out{i}.params.k,class_out{i}.params.m);
-class_out{i}.method = 'Fuzzy KNN';
-
-i = i+1;
-class_out{i}.params.k = 3;
-class_out{i}.params.m = 2.1;
-class_out{i}.params.eta = .01;
-class_out{i}.result = poss_knn_classifier(hsi_img,train_data,class_out{i}.params.k,class_out{i}.params.m,class_out{i}.params.eta);
-class_out{i}.method = 'Possibilistic KNN';
-
 %% Visualize
 
-%show knn results
+%show k
 figure(101);
 numR = 1;
 numC = 2; 
-subplot(numR,numC,1); imagesc(get_RGB(hsi_img, wavelength)); title('RGB image');  axis image;
+subplot(numR,numC,1); imagesc(get_RGB(hsi_img, wavelength)); title('RGB image');
 for i = 1:length(train_data)
     TickLabels{i} = train_data(i).name;
 end
-subplot(numR, numC, 2); imagesc(class_out{1}.result); title(class_out{1}.method);  axis image;
+subplot(numR, numC, 2); imagesc(class_out{1}.result); title(class_out{1}.method);
 colorbar('Ticks',[1:length(train_data)],'TickLabels',TickLabels)
 
-%show fknn results
+
 figure(102);
 numR = 1;
-numC = length(train_data)+1; 
-subplot(numR,numC,1); imagesc(get_RGB(hsi_img, wavelength)); title('RGB image');  axis image;
-for j = 1:length(train_data)
-	subplot(numR, numC, j+1); imagesc(class_out{2}.result(:,:,j), [0,1]); title([class_out{2}.method, ' ', TickLabels{j}]); axis image;
-end
-
-%show pknn results
-figure(103);
-numR = 1;
-numC = length(train_data)+1; 
-subplot(numR,numC,1); imagesc(get_RGB(hsi_img, wavelength)); title('RGB image');  axis image;
-for j = 1:length(train_data)
-	subplot(numR, numC, j+1); imagesc(class_out{3}.result(:,:,j)); title([class_out{3}.method, ' ', TickLabels{j}]);  axis image;
+numC = 1; 
+subplot(numR,numC,1); imagesc(get_RGB(hsi_img, wavelength)); title('RGB image');
+for i = 1:length(class_out)
+	subplot(numR, numC, i+1); imagesc(class_out{i}.result); title(class_out{i}.method);
+    colorbar('Ticks',[1:length(train_data)],'TickLabels',TickLabels)
 end
