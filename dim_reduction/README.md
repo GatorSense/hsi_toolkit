@@ -5,7 +5,7 @@ Demo instructions:
 
 (1) load an_hsi_image_sub_for_demo.mat
 
-(2) run `im_reduced = dim_reduction_demo(hsi_sub, wavelengths)`
+(2) run `im_reduced = dim_reduction_demo(hsi_img_sub, wavelengths)`
 
 
 Suite of dimensionality reduction methods implemented so far:

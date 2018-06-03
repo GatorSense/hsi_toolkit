@@ -17,12 +17,14 @@ function im_reduced = dim_reduction_demo(img, wavelengths)
 
 i = 1;
 addpath('hierarchical_dim_reduction');
-im_reduced{i}.result = dimReduction(img, dimReductionParameters());
+im_reduced{i}.params =  dimReductionParameters();
+im_reduced{i}.result = dimReduction(img, im_reduced{i}.params);
 im_reduced{i}.method = 'hierarchical dimensionality reduction';
 
 i = i+1;
 addpath('mnf');
-im_reduced{i}.result = MNF(img, MNFParameters());
+im_reduced{i}.params = MNFParameters();
+im_reduced{i}.result = MNF(img, im_reduced{i}.params);
 im_reduced{i}.result = im_reduced{i}.result - min(min(im_reduced{i}.result(:)));
 im_reduced{i}.result = im_reduced{i}.result / max(max(im_reduced{i}.result(:)));
 im_reduced{i}.method = 'mnf';

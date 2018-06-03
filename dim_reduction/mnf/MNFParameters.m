@@ -12,4 +12,4 @@ function params = MNFParameters()
 
 params = struct();
 params.dim_reduce = true;  % logical flag on whether to do a dimensionality reduction on final PCA step
-params.en_pct = 0.98;       % if dim_reduce, percentage of eigenvalues to retain
+params.en_pct = 0.999;       % if dim_reduce, percentage of eigenvalues to retain
