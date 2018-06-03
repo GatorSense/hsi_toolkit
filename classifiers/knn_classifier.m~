@@ -3,13 +3,6 @@ function knn_out = knn_classifier(hsi_img,train_data,mask,k)
 %
 %  a simple K nearest nieghbors classifier 
 %
-% Inputs:
-%   hsi_img: hyperspectral data cube (n_rows x n_cols x n_bands)
-%   train_data: structure containing training data 
-%       train_data(i).Spectra: matrix containing training data from class i
-%   mask: binary image indicating where to apply classifier
-%   k:  number of neighbors to use during classification
-%
 % 10/31/2012 - Taylor C. Glenn
 % 05/12/2018 - Edited by Alina Zare
 
@@ -19,8 +12,11 @@ knn_out = img_det(@knn_cfr,hsi_img,train_data,mask,k);
 
 end
 
-function knn_out = knn_cfr(hsi_data,train_data,K)
+function knn_out = knn_cfr(hsi_data,train_data,k)
 
+if(nargin < 3)
+    k = 5;
+end
 
 % concatenate the training data
 train = [train_data.Spectra];
