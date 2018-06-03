@@ -19,6 +19,7 @@ function det_out = anomaly_det_demo(hsi_img, mask, wavelengths)
 %
 % 5/5/2018 - Alina Zare
 
+addpath(fullfile('..','util'));
 det_out = {};
 
 [beta_out] = beta_anomaly(hsi_img,mask);

@@ -47,7 +47,7 @@ if n_out > 1
     argout = cell(1,n_out-1);
     varargout = cell(1,n_out-1);
     
-    [det_data(mask(:)),argout{:}] = detector_fn(hsi_data(:,mask(:)),tgt_sig,argin{:});
+    [det_data(logical(mask(:))),argout{:}] = detector_fn(hsi_data(:,logical(mask(:))),tgt_sig,argin{:});
         
     for i=1:numel(argout)
         %check for linearized-image like outputs, reshape them into images
@@ -61,7 +61,7 @@ if n_out > 1
     end
     
 else
-    det_data(mask(:)) = detector_fn(hsi_data(:,mask(:)),tgt_sig,argin{:});
+    det_data(logical(mask(:))) = detector_fn(hsi_data(:,logical(mask(:))),tgt_sig,argin{:});
 end
 
 det_out = reshape(det_data,[n_row,n_col]);
