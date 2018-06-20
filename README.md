@@ -4,8 +4,10 @@ hsi_toolkit
 ***
 NOTE: If this toolkit is used in any publication, presentation or elsewhere, the following reference must be cited:
 
-A. Zare, T. Glenn, P. Gader, (2018, May) GatorSense/hsi_toolkit (Version v0.1),
-DOI forthcoming
+A. Zare, T. Glenn, P. Gader, (2018, May) GatorSense/hsi_toolkit (Version v0.1), Zenodo,
+http://doi.org/10.5281/zenodo.1186417
+
+[![DOI](https://zenodo.org/badge/104386266.svg)](https://zenodo.org/badge/latestdoi/104386266)
 
 ****
 
