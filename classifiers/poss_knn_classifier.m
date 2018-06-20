@@ -59,9 +59,9 @@ pknn_out = zeros(n_pix,n_class);
 [idx, D] = knnsearch(train',hsi_data','K',K);
 weights = D-eta;
 weights(weights < 0) = 0;
-weights = 1./(1+(weights.^(2/(m-1))+eps));
+weights = 1./(1+(weights.^(2/(m-1)))+eps);
 for i=1:n_pix
-    pknn_out(i,:) = sum(repmat(weights(i,:)', [1, n_class]).*mu(idx(i,:),:)); 
+    pknn_out(i,:) = (1/K)*sum(repmat(weights(i,:)', [1, n_class]).*mu(idx(i,:),:)); 
 end
 
 pknn_img = zeros(n_rows, n_cols, n_class);
