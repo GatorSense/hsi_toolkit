@@ -8,7 +8,10 @@ Demo instructions:
 (2) run `class_out = classification_demo(hsi_sub, train_data, [], wavlength)`
 
 Suite of classification methods implemented so far:
+
 -knn_classifier: simple K-Nearest Neighbors classifier
+-fuzzy_knn_classifier: the Fuzzy K-Nearest Neighbors classifier
+-poss_knn_classifier: the Possibilistic K-Nearest Neighbors classifier
 
 
 Contact: Alina Zare, azare@ufl.edu
