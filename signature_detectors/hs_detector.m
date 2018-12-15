@@ -33,11 +33,11 @@ function hs_data = hs_det(hsi_data,tgt_sig,ems)
 
 params = struct();
 params.sum_to_one = true;
-P = unmix2(hsi_data,ems,params); %unmix2 from FUMI directory currently
+P = unmix2(hsi_data,ems,params); % unmix2 from SPICE directory currently
 
 % unmix data with target signature as well
 
-targ_P = unmix2(hsi_data,[tgt_sig ems],params); 
+targ_P = unmix2(hsi_data,[tgt_sig ems],params);
 
 
 hs_data = zeros(1,n_pix);

@@ -38,7 +38,7 @@ params.sum_to_one = true;
 
 % unmix data with only background endmembers
 
-P = unmix2(hsi_data,ems,params); %unmix2 from FUMI directory currently
+P = unmix2(hsi_data,ems,params); % unmix2 from SPICE directory currently
 
 % find the covariance of the background unmixing residual
 res = zeros(n_band,n_pix);
@@ -50,7 +50,7 @@ siginv = pinv(cov(res'));
 
 % unmix data with target signature as well
 
-targ_P = unmix2(hsi_data,[tgt_sig ems],params); 
+targ_P = unmix2(hsi_data,[tgt_sig ems],params);
 
 % model background and target abundance distributions
 gmm_bg = gmdistribution.fit(P,n_comp,'Replicates',1,'Regularize',1e-6);

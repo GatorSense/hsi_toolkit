@@ -40,7 +40,7 @@ params.sum_to_one = false;
 
 % unmix data with target signature and background
 
-targ_P = unmix2(hsi_data,[tgt_sig ems],params); 
+targ_P = unmix2(hsi_data,[tgt_sig ems],params); % unmix2 from SPICE directory currently
 
 
 hud_data = zeros(1,n_pix);

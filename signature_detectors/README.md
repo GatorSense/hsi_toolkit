@@ -37,7 +37,7 @@ Suite of signature detectors implemented so far:
 - smf_max_detector: Spectral Matched Filter given multiple target signatures. Confidence value for each pixel is max SMF score over all target signatures.
 - spsmf_detector: Subpixel Spectral Matched Filter
 
-Anomaly detectors can also be run in *Segmented* mode using segmented.m utility.
+Signature detectors can also be run in *Segmented* mode using segmented.m utility.
 Segmented mode is where a detector is applied to segments of the imagery separately (i.e., background statistics computed from segment rather than full image).  
 See segmented examples in demo code.
 
