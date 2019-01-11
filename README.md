@@ -1,4 +1,4 @@
-# GatorSense Hyperspectral Image Analysis Toolkit
+# GatorSense Hyperspectral Image Analysis Toolkit - Matlab Implementation
 hsi_toolkit
 
 ***
