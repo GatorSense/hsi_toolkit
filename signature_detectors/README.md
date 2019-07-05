@@ -8,7 +8,7 @@ Demo instructions:
 (2) run `det_out = signature_det_demo(hsi_sub, tgt_spectra, [], wavelengths, gtImg_sub)`
 
 Suite of signature detectors implemented so far:
-- abd_detector: Abudance of target signature when unmixed using target signature and background endmembers assuming the linear mixing model
+- abd_detector: Abundance of target signature when unmixed using target signature and background endmembers assuming the linear mixing model
 - ace_detector: Squared Adaptive Cosine/Coherence Estimator (Squared ACE), cosine of vector angle between target and pixel spectra after whitening based on background statistics, squared
 - ace_local_detector: Adaptive Cosine/Coherence Estimator where background statistics are estimated from local window
 - ace_ss_detector: Squared Adaptive Cosine/Coherence Estimator Subspace Formulation
